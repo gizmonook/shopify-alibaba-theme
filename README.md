@@ -1,4 +1,4 @@
-# shopify-alibaba-theme
+layout/theme.liquid
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +17,7 @@
   {{ 'theme.js' | asset_url | script_tag }}
 </body>
 </html>
+sections/header.liquid
 <header class="header">
   <div class="header-top">
     <div class="logo">
@@ -38,6 +39,7 @@
     </ul>
   </nav>
 </header>
+snippets/search-form.liquid
 <form action="/search" method="get" role="search">
   <input
     type="search"
@@ -47,8 +49,11 @@
   >
   <button type="submit">Search</button>
 </form>
+templates/index.liquid
+{% section 'product-grid' %}
+sections/product-grid.liquid
 <div class="product-grid">
-  {% for product in collection.products %}
+  {% for product in collections.all.products %}
     <div class="product-item">
       <a href="{{ product.url }}">
         <img
@@ -61,6 +66,7 @@
     </div>
   {% endfor %}
 </div>
+assets/theme.css
 /* Reset */
 * {
   margin: 0;
@@ -123,8 +129,28 @@
   max-width: 100%;
   height: auto;
 }
+assets/theme.js
 // Toggle mobile menu (add later)
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Theme loaded!');
 });
-npm install -g @shopify/cli
+config/settings_schema.json
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Alibaba Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "umair shafique",
+    "theme_documentation_url": "https://github.com/your-username/shopify-alibaba-theme",
+    "theme_support_url": "https://github.com/your-username/shopify-alibaba-theme/issues"
+  }
+]
+locales/en.default.json
+{
+  "general": {
+    "search": {
+      "placeholder": "Search products, suppliers..."
+    }
+  }
+}
+
